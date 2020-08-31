@@ -7,7 +7,7 @@ module.exports = {
         .setTitle("Liste de mes commandes")
         .setThumbnail(bot.user.displayAvatarURL())
         .setColor('#bf9322')
-        .addField("Générales", `**${prefix}help** Affiche ce message ! :tada:\n**${prefix}botinfo** Affiche des informations concernant le bot`)
+        .addField("Générales", `**${prefix}help** Affiche ce message ! :tada:\n**${prefix}botinfo** Affiche des informations concernant le bot:\n**${prefix}invite** Invitez moi !`)
         .addField("Info", `**${prefix}info** Permet de rechercher des cosmétiques du Battle Royale`)
         .addField("News", `**${prefix}news** Donne les actualités en jeux (\`br\`, \`creatif\` ou \`stw\`)`, true)
         .addField("Stats", `**${prefix}stats** Affiche le menu de stats`, true)
