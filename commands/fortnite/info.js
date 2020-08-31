@@ -4,7 +4,7 @@ const Canvas = require("canvas");
 
 module.exports = {
     name: "info",
-    cooldown: 30,
+    cooldown: 10,
     async execute(message, args, bot, prefix) {
         const infoCosmetics = new Promise(async (resolve, reject) => {
             const language =  new Promise(async(resolve, reject) => {

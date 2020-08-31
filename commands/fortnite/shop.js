@@ -4,7 +4,7 @@ const { genratateShop } = require('../../functions/shop.js')
 
 module.exports = {
     name: "shop",
-    cooldown: 60,
+    cooldown: 20,
     async execute(message, args, bot, prefix) {
         var response = await axios({method: 'get',url: 'https://fortnite-api.com/v2/shop/br/combined?language=fr'})
 

@@ -5,7 +5,7 @@ const { generateNewsBR, generateNewsCreatif, generateNewsSTW } = require('../../
 
 module.exports = {
     name: "news",
-    cooldown: 20,
+    cooldown: 5,
     async execute(message, args, bot, prefix) {
 
         message.channel.startTyping()

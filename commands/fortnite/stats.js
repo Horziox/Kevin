@@ -4,7 +4,7 @@ const Canvas = require("canvas");
 
 module.exports = {
     name: "stats",
-    cooldown: 60,
+    cooldown: 10,
     async execute(message, args, bot, prefix) {
         if(args.length == 0) {
             let embed = new Discord.MessageEmbed()
