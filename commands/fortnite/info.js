@@ -24,7 +24,7 @@ module.exports = {
                     await langMessage.reactions.removeAll()
                     let endEmbed = new Discord.MessageEmbed()
                     if(collected.size == 0) {
-                        endEmbed.setDescription(`La lenteur a un nom : **${message.author.username}** :joy:`)
+                        endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tles informations, merci de recommencer !`)
                         .setColor("#bf9322")
                         .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
@@ -62,7 +62,7 @@ module.exports = {
                         collector.on('end', async(msg) => {
                             let endEmbed = new Discord.MessageEmbed()
                             if(msg.length == 0) {
-                                endEmbed.setDescription(`La lenteur a un nom : **${message.author.username}** :joy:`)
+                                endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tles informations, merci de recommencer !`)
                                 .setColor("#bf9322")
                                 .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()

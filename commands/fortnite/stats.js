@@ -43,7 +43,7 @@ module.exports = {
                 await botmsg.reactions.removeAll()
                 let endEmbed = new Discord.MessageEmbed()
                 if(collected.size == 0) {
-                    endEmbed.setDescription("Dis donc l'escargot, tu est bien lent pour cliquer sur une réaction !\nSi tu veux avoir tes statistiques, merci de recommencer ! <:panda_love:729670475743100938>")
+                    endEmbed.setDescription("Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tes statistiques, merci de recommencer !")
                     .setColor("#bf9322")
                     .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                     .setTimestamp()
