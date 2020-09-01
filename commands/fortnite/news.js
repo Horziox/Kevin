@@ -1,68 +1,99 @@
 const Discord = require("discord.js");
 const axios = require("axios");
+const fs = require("fs");
 
 const { generateNewsBR, generateNewsCreatif, generateNewsSTW } = require('../../functions/news.js')
 
 module.exports = {
     name: "news",
-    cooldown: 5,
+    cooldown: 3,
     async execute(message, args, bot, prefix) {
 
         message.channel.startTyping()
 
-        var request = await axios({
-            method: 'get',
-            url: 'https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game',
-            headers: { 
-                'Accept-Language': 'fr-FR', 
-            }
-        })
-
+        let embed = new Discord.MessageEmbed()
+        .setColor('#bf9322')
+        .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
+        .setTimestamp()
+    
         if(!args.length || args[0] == 'br') {
-            if(request.data.battleroyalenews.news["platform_motds"].length == 0) {
-                await message.channel.stopTyping()
-                return message.reply("il n'y a actuellement aucune actualité en jeu")
-            }
-            generateNewsBR(request.data.battleroyalenews).then(async (value) => {
-                let embed = new Discord.MessageEmbed()
-                .setTitle("Actualités Fortnite Battle Royale")
-                .setColor('#bf9322')
-                .attachFiles(value)
-                .setImage('attachment://br-news.gif')
-                .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
-                .setTimestamp()
+            embed.setTitle("Actualités Fortnite Battle Royale")
+            fs.stat('./final/br-news.gif', async function(err, stats) {
+                if(!err) {
+                    embed.attachFiles('./final/br-news.gif')
+                    .setImage('attachment://br-news.gif')
+                }
+                else {
+                    const request = await axios({
+                        method: 'get',
+                        url: 'https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game',
+                        headers: { 
+                            'Accept-Language': 'fr-FR', 
+                        }
+                    })
+                    if(request.data.battleroyalenews.news["platform_motds"].length == 0) {
+                        message.channel.stopTyping()
+                        return message.reply("il n'y a actuellement aucune actualité en jeu")
+                    }
+                    await generateNewsBR(request.data.battleroyalenews).then(async (value) => {
+                        embed.attachFiles(value)
+                        .setImage('attachment://br-news.gif')
+                    })
+                }
                 await message.channel.stopTyping()
                 return await message.channel.send(embed)
             })
         } else if(args[0] == 'creatif') {
-            if(request.data.creativenews.news["platform_motds"].length == 0) {
-                await message.channel.stopTyping()
-                return message.reply("il n'y a actuellement aucune actualité en jeu")
-            }
-            generateNewsCreatif(request.data.creativenews).then(async (value) => {
-                let embed = new Discord.MessageEmbed()
-                .setTitle("Actualités Fortnite Créatif")
-                .setColor('#bf9322')
-                .attachFiles(value)
-                .setImage('attachment://creatif-news.gif')
-                .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
-                .setTimestamp()
+            embed.setTitle("Actualités Fortnite Créatif")
+            fs.stat('./final/creatif-news.gif', async function(err, stats) {
+                if(!err) {
+                    embed.attachFiles('./final/creatif-news.gif')
+                    .setImage('attachment://creatif-news.gif')
+                }
+                else {
+                    const request = await axios({
+                        method: 'get',
+                        url: 'https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game',
+                        headers: { 
+                            'Accept-Language': 'fr-FR', 
+                        }
+                    })
+                    if(request.data.creativenews.news["platform_motds"].length == 0) {
+                        message.channel.stopTyping()
+                        return message.reply("il n'y a actuellement aucune actualité en jeu")
+                    }
+                    await generateNewsCreatif(request.data.creativenews).then(async (value) => {
+                        embed.attachFiles(value)
+                        .setImage('attachment://creatif-news.gif')
+                    })
+                }
                 await message.channel.stopTyping()
                 return await message.channel.send(embed)
             })
         } else if(args[0] == 'stw') {
-            if(request.data.savetheworldnews.news.messages.length == 0) {
-                await message.channel.stopTyping()
-                return message.reply("il n'y a actuellement aucune actualité en jeu")
-            }
-            generateNewsSTW(request.data.savetheworldnews).then(async (value) => {
-                let embed = new Discord.MessageEmbed()
-                .setTitle("Actualités Fortnite Sauver le Monde")
-                .setColor('#bf9322')
-                .attachFiles(value)
-                .setImage('attachment://stw-news.gif')
-                .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
-                .setTimestamp()
+            embed.setTitle("Actualités Fortnite Sauver le Monde")
+            fs.stat('./final/stw-news.gif', async function(err, stats) {
+                if(!err) {
+                    embed.attachFiles('./final/stw-news.gif')
+                    .setImage('attachment://stw-news.gif')
+                }
+                else {
+                    const request = await axios({
+                        method: 'get',
+                        url: 'https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game',
+                        headers: { 
+                            'Accept-Language': 'fr-FR', 
+                        }
+                    })
+                    if(request.data.savetheworldnews.news.messages.length == 0) {
+                        message.channel.stopTyping()
+                        return message.reply("il n'y a actuellement aucune actualité en jeu")
+                    }
+                    await generateNewsSTW(request.data.savetheworldnews).then(async (value) => {
+                        embed.attachFiles(value)
+                        .setImage('attachment://stw-news.gif')
+                    })
+                }
                 await message.channel.stopTyping()
                 return await message.channel.send(embed)
             })
