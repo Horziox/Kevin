@@ -31,10 +31,10 @@ module.exports = {
             .setTimestamp()
             const botmsg = await message.channel.send(embed)
 
-            if(response.data.data.stats.keyboardMouse !== null) await botmsg.react(message.guild.emojis.cache.get("744916159752699904"))
-            if(response.data.data.stats.gamepad !== null) await botmsg.react(message.guild.emojis.cache.get("744916145034756126"))
-            if(response.data.data.stats.touch !== null) await botmsg.react(message.guild.emojis.cache.get("744916201301606520"))
-            await botmsg.react(message.guild.emojis.cache.get("744916178081939477"))
+            if(response.data.data.stats.keyboardMouse !== null) await botmsg.react("744916159752699904")
+            if(response.data.data.stats.gamepad !== null) await botmsg.react("744916145034756126")
+            if(response.data.data.stats.touch !== null) await botmsg.react("744916201301606520")
+            await botmsg.react("744916178081939477")
 
             const filter = (user) => user.id = message.author.id
             const collector = botmsg.createReactionCollector(filter, {time: 20000, max: 1})
@@ -233,6 +233,7 @@ module.exports = {
                 }
             });
         }).catch((e) => {
+            console.log(e)
             let embed = new Discord.MessageEmbed()
             if(e.response.status == 404) {
                 embed.setTitle("Compte introuvable !")
