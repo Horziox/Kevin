@@ -15,7 +15,7 @@ module.exports = {
             .setTimestamp()
             return message.channel.send(embed)
         }
-        axios({
+        await axios({
             method: 'get',
             url: 'https://fortnite-api.com/v1/stats/br/v2?name='+encodeURIComponent(args.join(" "))
         }).then(async function(response) {
