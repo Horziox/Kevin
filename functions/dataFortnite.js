@@ -103,7 +103,7 @@ module.exports = {
                 .setColor("#bf9322")
                 .setFooter(response.data.data.hash, bot.user.displayAvatarURL())
                 .setTimestamp()
-                await message.channel.send(embed).then(message => {
+                await channel.send(embed).then(message => {
                     axios({
                         method: 'post',
                         url: `https://discord.com/api/v6/channels/${channel.id}/messages/${message.id}/crosspost`,
