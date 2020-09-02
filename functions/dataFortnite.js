@@ -102,7 +102,6 @@ module.exports = {
                 .setImage("attachment://shop.png")
                 .setColor("#bf9322")
                 .setFooter(response.data.data.hash, bot.user.displayAvatarURL())
-                .setTimestamp()
                 await channel.send(embed).then(message => {
                     axios({
                         method: 'post',
