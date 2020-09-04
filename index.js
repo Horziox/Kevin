@@ -58,3 +58,7 @@ schedule.scheduleJob('*/20 * * * * *', function() {
 schedule.scheduleJob('5 0 0 * * *', function() {
     data.reloadShop(bot)
 })
+
+schedule.scheduleJob('*/1 * * * *', function() {
+    data.reloadShop(bot)
+})

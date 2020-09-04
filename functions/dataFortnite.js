@@ -95,6 +95,7 @@ module.exports = {
             url: 'https://fortnite-api.com/v2/shop/br/combined?language=fr',
         }).then(async function(response) {
             if(response.status !== 200) return
+            if(response.data.data.hash === channel.topic) return 
             await shop.genratateShop(response.data.data).then(async (value) => {
                 let embed = new Discord.MessageEmbed()
                 .setTitle(`Shop Fortnite Battle Royale`)
@@ -112,7 +113,7 @@ module.exports = {
                     })
                 })
             })
-            return
+            return await channel.setTopic(response.data.data.hash)
         })
     },
 }
