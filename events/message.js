@@ -15,10 +15,9 @@ module.exports = (bot, message) => {
 
     if(!command) return;
 
-    if(command.havePermissions) {
-        if(!message.channel.permissionsFor(bot.user).has(3072)) return
-        if(!message.channel.permissionsFor(bot.user).has(322624)) return message.channel.send(':warning: Il me manque des permissions dans ce salon pour fonctionner correctement !\nContactez un Staff de ce serveur ou vérifiez que les permissions suivante sois cochées dans les paramètres du salon :\n\`Gérer les messages\`, \`Intégrer des liens\`, \`Joindre des fichiers\`, \`Utiliser des émojis externes\` et \`Ajouter des réactions\`')
-    }
+    if(!message.channel.permissionsFor(bot.user).has(3072)) return
+
+    if(command.havePermissions) if(!message.channel.permissionsFor(bot.user).has(322624)) return message.channel.send(':warning: Il me manque des permissions dans ce salon pour fonctionner correctement !\nContactez un Staff de ce serveur ou vérifiez que les permissions suivante sois cochées dans les paramètres du salon :\n\`Gérer les messages\`, \`Intégrer des liens\`, \`Joindre des fichiers\`, \`Utiliser des émojis externes\` et \`Ajouter des réactions\`')
 
     if(command.isDisable) {
         return message.reply("Cette commande à été désactivée...\nPatience, elle reviendra bientôt ! :tada:");
