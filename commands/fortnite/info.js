@@ -5,6 +5,7 @@ const Canvas = require("canvas");
 module.exports = {
     name: "info",
     cooldown: 10,
+    havePermissions: true,
     async execute(message, args, bot, prefix) {
         const infoCosmetics = new Promise(async (resolve, reject) => {
             const language =  new Promise(async(resolve, reject) => {

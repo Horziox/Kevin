@@ -5,6 +5,7 @@ const Canvas = require("canvas");
 module.exports = {
     name: "stats",
     cooldown: 10,
+    havePermissions: true,
     async execute(message, args, bot, prefix) {
         if(args.length == 0) {
             let embed = new Discord.MessageEmbed()
