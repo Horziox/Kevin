@@ -7,6 +7,16 @@ module.exports = {
     cooldown: 10,
     havePermissions: true,
     async execute(message, args, bot, prefix) {
+        if(!args.length) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("Commandes Info Fortnite")
+            .setDescription(`${prefix}cos Nom de la cosmétique\n\nEx: ${prefix}cos FLoss`)
+            .setColor("#bf9322")
+            .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
+            .setTimestamp()
+            return message.channel.send(embed)
+        }
+
         const infoCosmetics = new Promise(async (resolve, reject) => {
             const language =  new Promise(async(resolve, reject) => {
                 let langEmbed = new Discord.MessageEmbed()
@@ -105,16 +115,6 @@ module.exports = {
                 });
             })
         })
-
-        if(args.length == 0) {
-            let embed = new Discord.MessageEmbed()
-            .setTitle("Commandes Info Fortnite")
-            .setDescription(`${prefix}cos Nom de la cosmétique\n\nEx: ${prefix}cos FLoss`)
-            .setColor("#bf9322")
-            .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
-            .setTimestamp()
-            return message.channel.send(embed)
-        }
 
         infoCosmetics.then(async (value) => {
             let embed = new Discord.MessageEmbed()
