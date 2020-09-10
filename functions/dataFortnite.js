@@ -18,14 +18,14 @@ module.exports = {
             if(response.status !== 200) return
             
             let channel = bot.channels.cache.get(channels.battleroyalenews)
-            if(response.data.battleroyalenews["jcr:baseVersion"] !== channel.topic && response.data.battleroyalenews.news["platform_motds"].length !== 0) {
-                await news.generateNewsBR(response.data.battleroyalenews).then(async (value) => {
+            if(response.data.battleroyalenewsv2["jcr:baseVersion"] !== channel.topic && response.data.battleroyalenewsv2.news.motds.length !== 0) {
+                await news.generateNewsBR(response.data.battleroyalenewsv2).then(async (value) => {
                     let embed = new Discord.MessageEmbed()
                     .setTitle("Actualités Battle Royale")
                     .setColor('#bf9322')
                     .attachFiles(value)
                     .setImage('attachment://br-news.gif')
-                    .setFooter(response.data.battleroyalenews["jcr:baseVersion"], bot.user.displayAvatarURL())
+                    .setFooter(response.data.battleroyalenewsv2["jcr:baseVersion"], bot.user.displayAvatarURL())
                     await channel.send(embed).then(message => {
                         axios({
                             method: 'post',
@@ -35,19 +35,19 @@ module.exports = {
                             }
                         })
                     })
-                    await channel.setTopic(response.data.battleroyalenews["jcr:baseVersion"])
+                    await channel.setTopic(response.data.battleroyalenewsv2["jcr:baseVersion"])
                 })
             }
 
             channel = bot.channels.cache.get(channels.creativenews)
-            if(response.data.creativenews["jcr:baseVersion"] !== channel.topic && response.data.creativenews.news["platform_motds"].length !== 0) {
-                await news.generateNewsCreatif(response.data.creativenews).then(async (value) => {
+            if(response.data.creativenewsv2["jcr:baseVersion"] !== channel.topic && response.data.creativenewsv2.news.motds.length !== 0) {
+                await news.generateNewsCreatif(response.data.creativenewsv2).then(async (value) => {
                     let embed = new Discord.MessageEmbed()
                     .setTitle("Actualités Fortnite Créatif")
                     .setColor('#bf9322')
                     .attachFiles(value)
                     .setImage('attachment://creatif-news.gif')
-                    .setFooter(response.data.creativenews["jcr:baseVersion"], bot.user.displayAvatarURL())
+                    .setFooter(response.data.creativenewsv2["jcr:baseVersion"], bot.user.displayAvatarURL())
                     await channel.send(embed).then(message => {
                         axios({
                             method: 'post',
@@ -57,7 +57,7 @@ module.exports = {
                             }
                         })
                     })
-                    await channel.setTopic(response.data.creativenews["jcr:baseVersion"])
+                    await channel.setTopic(response.data.creativenewsv2["jcr:baseVersion"])
                 })
             }
 

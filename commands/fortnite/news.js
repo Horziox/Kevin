@@ -31,11 +31,11 @@ module.exports = {
                             'Accept-Language': 'fr-FR', 
                         }
                     })
-                    if(request.data.battleroyalenews.news["platform_motds"].length == 0) {
+                    if(request.data.battleroyalenewsv2.news.motds.length == 0) {
                         message.channel.stopTyping()
                         return message.reply("il n'y a actuellement aucune actualité en jeu")
                     }
-                    await generateNewsBR(request.data.battleroyalenews).then(async (value) => {
+                    await generateNewsBR(request.data.battleroyalenewsv2).then(async (value) => {
                         embed.attachFiles(value)
                         .setImage('attachment://br-news.gif')
                     })
@@ -58,11 +58,11 @@ module.exports = {
                             'Accept-Language': 'fr-FR', 
                         }
                     })
-                    if(request.data.creativenews.news["platform_motds"].length == 0) {
+                    if(request.data.creativenewsv2.news.motds.length == 0) {
                         message.channel.stopTyping()
                         return message.reply("il n'y a actuellement aucune actualité en jeu")
                     }
-                    await generateNewsCreatif(request.data.creativenews).then(async (value) => {
+                    await generateNewsCreatif(request.data.creativenewsv2).then(async (value) => {
                         embed.attachFiles(value)
                         .setImage('attachment://creatif-news.gif')
                     })
