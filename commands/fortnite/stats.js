@@ -83,12 +83,10 @@ module.exports = {
 
                     const canvas = Canvas.createCanvas(1280, 920);
                     const ctx = canvas.getContext('2d');
-                    let lineaire = ctx.createLinearGradient(620, 740, 640, 0);
-                    lineaire.addColorStop(0,'#4c15d6')
-                    lineaire.addColorStop(0.4,'#3a2fd4')
-                    lineaire.addColorStop(0.9,'#a02cde')
-                    ctx.fillStyle = lineaire;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    const space = await Canvas.loadImage('./assets/space-background.png')
+                    ctx.drawImage(space, 0, 0, 1280, 300)
+                    ctx.fillStyle = "#272b2e";
+                    ctx.fillRect(0, 300, canvas.width, canvas.height);
                     let skins = ["https://media.discordapp.net/attachments/715327691842256906/749281675191779378/groot-rocket.png", "https://media.discordapp.net/attachments/715327691842256906/749282553155813476/ironman.png", "https://media.discordapp.net/attachments/715327691842256906/749285313339457601/punk-storm.png"]
                     let choice = skins[Math.floor(Math.random() * skins.length)];
                     const image = await Canvas.loadImage(choice);
