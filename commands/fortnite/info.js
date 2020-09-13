@@ -10,7 +10,7 @@ module.exports = {
         if(!args.length) {
             let embed = new Discord.MessageEmbed()
             .setTitle("Commandes Info Fortnite")
-            .setDescription(`${prefix}cos Nom de la cosmétique\n\nEx: ${prefix}cos FLoss`)
+            .setDescription(`${prefix}info Nom de la cosmétique\n\nEx: ${prefix}info FLoss`)
             .setColor("#bf9322")
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
             .setTimestamp()
@@ -59,7 +59,7 @@ module.exports = {
                         .setTitle("Résultats de la recherche")
                         .setDescription(`**${data.length}** cosmétiques correspondent avec votre recherche : \`${args.join(" ")}\``)
                         for(let e = 0; e<data.length; e++) {
-                            choiceEmbed.addField(`${data[e].name} (${data[e].type.displayValue})`, `Tapez ${e+1} pour plus d'informations`, true)
+                            choiceEmbed.addField(`${data[e].name} (${data[e].type.displayValue})`, `Tapez \`${e+1}\` pour plus d'informations`, true)
                         }
                         choiceEmbed.setTimestamp()
                         const choiceMessage = await message.channel.send(choiceEmbed)
@@ -117,6 +117,7 @@ module.exports = {
         })
 
         infoCosmetics.then(async (value) => {
+            message.channel.startTyping()
             let embed = new Discord.MessageEmbed()
             let canvasH = 600
 
@@ -175,6 +176,7 @@ module.exports = {
             .setImage('attachment://info.png')
             .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
             .setTimestamp()
+            await message.channel.stopTyping()
             return await message.channel.send(embed)
         })
     }
