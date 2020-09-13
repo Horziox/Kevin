@@ -43,9 +43,10 @@ module.exports = {
                 }
 
                 var cosmetic;
-                if(data[shopType].entries[e].bundle !== null && data[shopType].entries[e].bundle.image !== null) cosmetic = await Canvas.loadImage(data[shopType].entries[e].bundle.image)
                 if(data[shopType].entries[e].items[0].images.featured !== null) cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.featured)
                 else cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.icon)
+
+                if(data[shopType].entries[e].bundle !== null && data[shopType].entries[e].bundle.image !== null) cosmetic = await Canvas.loadImage(data[shopType].entries[e].bundle.image)
 
                 ctx.drawImage(box, decalLeft, decalHeight, 200, 300)
                 ctx.drawImage(cosmetic, decalLeft-15, decalHeight+30, 230, 230)
@@ -57,14 +58,16 @@ module.exports = {
                 ctx.fillStyle = "#000724";
                 ctx.fillRect(decalLeft, decalHeight+260, 200, 40);
 
-                if(data[shopType].entries[e].items.length > 1) {
-                    let i = 1;
-                    let boxHeight = 0;
-                    while(i < data[shopType].entries[e].items.length) {
-                        let cos = await Canvas.loadImage(data[shopType].entries[e].items[i].images.smallIcon)
-                        ctx.drawImage(cos, decalLeft+150, decalHeight+boxHeight, 50, 50)
-                        boxHeight = boxHeight + 50;
-                        i++  
+                if(data[shopType].entries[e].bundle == null) {
+                    if(data[shopType].entries[e].items.length > 1) {
+                        let i = 1;
+                        let boxHeight = 160;
+                        while(i < data[shopType].entries[e].items.length) {
+                            let cos = await Canvas.loadImage(data[shopType].entries[e].items[i].images.smallIcon)
+                            ctx.drawImage(cos, decalLeft+160, decalHeight+boxHeight, 40, 40)
+                            boxHeight = boxHeight - 40;
+                            i++  
+                        }
                     }
                 }
 
@@ -87,9 +90,7 @@ module.exports = {
                 //Type
                 ctx.font = "20px Burbank Big Cd Bk";
                 ctx.fillStyle = '#ffffff';
-                let nb = data[shopType].entries[e].items.length;
-                nb = nb - 1;
-                if(data[shopType].entries[e].bundle !== null) finalName = "Pack de " + nb + " items"
+                if(data[shopType].entries[e].bundle !== null) finalName = "Pack de " + data[shopType].entries[e].items.length + " items"
                 else finalName = data[shopType].entries[e].items[0].type.displayValue;
                 measure = ctx.measureText(finalName).width;
                 left = decalLeft + (100 - (measure / 2));
