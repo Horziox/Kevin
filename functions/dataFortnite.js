@@ -5,6 +5,7 @@ const channels = require('../channels.json');
 
 const news = require('./news.js');
 const shop = require('./shop.js')
+const newCos = require('./newCosmetics.js')
 
 module.exports = {
     async reloadData(bot) {
@@ -101,6 +102,35 @@ module.exports = {
                 .setTitle(`Shop Fortnite Battle Royale`)
                 .attachFiles(value)
                 .setImage("attachment://shop.png")
+                .setColor("#bf9322")
+                .setFooter(response.data.data.hash, bot.user.displayAvatarURL())
+                await channel.send(embed).then(message => {
+                    axios({
+                        method: 'post',
+                        url: `https://discord.com/api/v6/channels/${channel.id}/messages/${message.id}/crosspost`,
+                        headers: {
+                            "Authorization" : `Bot ${process.env.discordToken}`
+                        }
+                    })
+                })
+            })
+            return await channel.setTopic(response.data.data.hash)
+        })
+    },
+
+    async reloadNewCos(bot) {
+        const channel = bot.channels.cache.get(channels.newCos)
+        axios({
+            method: 'get',
+            url: 'https://fortnite-api.com/v2/cosmetics/br/new?language=fr',
+        }).then(async function(response) {
+            if(response.status !== 200) return
+            if(response.data.data.hash === channel.topic) return 
+            await newCos.generateNewCos(response.data.data).then(async (value) => {
+                let embed = new Discord.MessageEmbed()
+                .setTitle(`Nouveaux cosmétiques Fortnite Battle Royale`)
+                .attachFiles(value)
+                .setImage("attachment://newCos.png")
                 .setColor("#bf9322")
                 .setFooter(response.data.data.hash, bot.user.displayAvatarURL())
                 await channel.send(embed).then(message => {

@@ -59,6 +59,7 @@ schedule.scheduleJob('5 0 0 * * *', function() {
     data.reloadShop(bot)
 })
 
-schedule.scheduleJob('*/1 * * * *', function() {
-    data.reloadShop(bot)
+schedule.scheduleJob('5 * * * * *', async function() {
+    await data.reloadShop(bot)
+    await data.reloadNewCos(bot)
 })
