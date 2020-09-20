@@ -60,15 +60,15 @@ module.exports = {
                 ctx.fillStyle = "#ffffff";
                 let fontSize = 30;
                 ctx.font = fontSize + 'px Burbank Big Cd Bk'
-                let measure = ctx.measureText(data.items[e].name.toUpperCase()).width
+                let measure = ctx.measureText(data.items[e].name).width
                 while (measure > 190) {
                     fontSize = fontSize - 1
                     ctx.font = fontSize + 'px Burbank Big Cd Bk'
-                    measure = ctx.measureText(data.items[e].name.toUpperCase()).width
+                    measure = ctx.measureText(data.items[e].name).width
                 }
                 let left = decalLeft + (100 - (measure / 2))
-                ctx.fillText(data.items[e].name.toUpperCase(), left, decalHeight+260);
-                ctx.strokeText(data.items[e].name.toUpperCase(), left, decalHeight+260);
+                ctx.fillText(data.items[e].name, left, decalHeight+260);
+                ctx.strokeText(data.items[e].name, left, decalHeight+260);
                 //Type
                 ctx.font = "20px Burbank Big Cd Bk";
                 ctx.fillStyle = '#ffffff';
