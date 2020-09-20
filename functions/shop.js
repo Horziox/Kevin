@@ -40,20 +40,32 @@ module.exports = {
                     box = await Canvas.loadImage(`./assets/box/box_${data[shopType].entries[e].items[0].rarity.value}.png`)
                 } catch {
                     box = await Canvas.loadImage(`./assets/box/box_common.png`)
-                }
-
-                var cosmetic;
-                if(data[shopType].entries[e].items[0].images.featured !== null) cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.featured)
-                else cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.icon)
-
-                if(data[shopType].entries[e].bundle !== null && data[shopType].entries[e].bundle.image !== null) cosmetic = await Canvas.loadImage(data[shopType].entries[e].bundle.image)
-
+                }              
                 ctx.drawImage(box, decalLeft, decalHeight, 200, 300)
-                ctx.drawImage(cosmetic, decalLeft-15, decalHeight+30, 230, 230)
+
+                let cosmetic;
+                if(data[shopType].entries[e].bundle !== null && data[shopType].entries[e].bundle.image !== null) {
+                    cosmetic = await Canvas.loadImage(data[shopType].entries[e].bundle.image)
+                    ctx.drawImage(cosmetic, decalLeft-15, decalHeight+20, 240, 240)
+                } else {
+                    if(data[shopType].entries[e].items[0].images.featured !== null) {
+                        cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.featured)
+                        if(data[shopType].entries[e].items[0].type.value == "wrap") {
+                            ctx.drawImage(cosmetic, decalLeft-5, decalHeight+5, 210, 210) 
+                            cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.icon)
+                            ctx.drawImage(cosmetic, decalLeft+130, decalHeight+140, 75, 75)
+                        } 
+                        else ctx.drawImage(cosmetic, decalLeft-15, decalHeight+20, 220, 240)
+                    } else {
+                        cosmetic = await Canvas.loadImage(data[shopType].entries[e].items[0].images.icon)
+                        if(data[shopType].entries[e].items[0].type.value == "banner" || data[shopType].entries[e].items[0].type.value == "emoji") ctx.drawImage(cosmetic, decalLeft+25, decalHeight+30, 150, 150)
+                        else ctx.drawImage(cosmetic, decalLeft, decalHeight+25, 200, 200)
+                    } 
+                }
 
                 ctx.fillStyle = "black";
                 ctx.globalAlpha = 0.20;
-                ctx.fillRect(decalLeft, decalHeight+200, 200, 100);
+                ctx.fillRect(decalLeft, decalHeight+200, 200, 60);
                 ctx.globalAlpha = 1;
                 ctx.fillStyle = "#000724";
                 ctx.fillRect(decalLeft, decalHeight+260, 200, 40);
@@ -64,7 +76,7 @@ module.exports = {
                         let boxHeight = 160;
                         while(i < data[shopType].entries[e].items.length) {
                             let cos = await Canvas.loadImage(data[shopType].entries[e].items[i].images.smallIcon)
-                            ctx.drawImage(cos, decalLeft+160, decalHeight+boxHeight, 40, 40)
+                            ctx.drawImage(cos, decalLeft+155, decalHeight+160, 50, 50)
                             boxHeight = boxHeight - 40;
                             i++  
                         }
@@ -90,7 +102,7 @@ module.exports = {
                 //Type
                 ctx.font = "20px Burbank Big Cd Bk";
                 ctx.fillStyle = '#ffffff';
-                if(data[shopType].entries[e].bundle !== null) finalName = "Pack de " + data[shopType].entries[e].items.length + " items"
+                if(data[shopType].entries[e].bundle !== null) finalName = "Pack de " + data[shopType].entries[e].items.length + " objets"
                 else finalName = data[shopType].entries[e].items[0].type.displayValue;
                 measure = ctx.measureText(finalName).width;
                 left = decalLeft + (100 - (measure / 2));
