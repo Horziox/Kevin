@@ -12,6 +12,7 @@ module.exports = {
         .addField("News", `**${prefix}news** Donne les actualités en jeux (\`br\`, \`creatif\` ou \`stw\`)`, true)
         .addField("Stats", `**${prefix}stats** Affiche le menu de stats`, true)
         .addField("Shop", `**${prefix}shop** Affiche le shop du Battle Royale`, true)
+        .addField("Leak", `**${prefix}leak** Affiche les cosmétiques disponibles dans les fichiers du jeu depuis la dernière mise à jour`, true)
         .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
         .setTimestamp()
         message.channel.send(embed)
