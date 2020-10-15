@@ -21,7 +21,7 @@ module.exports = {
                 .setImage('attachment://newCos.png')
             }
             else {
-                var response = await axios({method: 'get',url: 'https://fortnite-api.com/v2/cosmetics/br/new?language=fr'})
+                const response = await axios({method: 'get',url: 'https://fortnite-api.com/v2/cosmetics/br/new?language=fr'})
                 await generateNewCos(response.data.data).then(async (value) => {
                     embed.attachFiles(value)
                     .setImage("attachment://newCos.png")

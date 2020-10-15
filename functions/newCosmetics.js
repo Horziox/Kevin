@@ -37,7 +37,7 @@ module.exports = {
                 }
                 ctx.drawImage(box, decalLeft, decalHeight, 200, 300)
 
-                var cosmetic;
+                let cosmetic;
                 if(data.items[e].images.featured !== null) {
                     cosmetic = await Canvas.loadImage(data.items[e].images.featured)
                     if(data.items[e].type.value == "wrap") {

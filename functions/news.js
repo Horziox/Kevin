@@ -29,9 +29,9 @@ module.exports = {
                 ctx.strokeText(data.news.motds[e].title.toUpperCase(), 30, 550);
                 ctx.font ="30px Burbank Big Cd Bk";
                 ctx.fillStyle = '#33edfe';
-                var text = data.news.motds[e].body;
-                var textSplit = text.split(" ");
-                var finalText = textSplit[0]
+                let text = data.news.motds[e].body;
+                let textSplit = text.split(" ");
+                let finalText = textSplit[0]
                 let t = 1;
                 while(t != textSplit.length) {
                     if((ctx.measureText(finalText+" "+textSplit[t]).width) <= 700) finalText = finalText+" "+textSplit[t]
@@ -92,9 +92,9 @@ module.exports = {
                 ctx.strokeText(data.news.motds[e].title.toUpperCase(), 30, 550);
                 ctx.font ="30px Burbank Big Cd Bk";
                 ctx.fillStyle = '#33edfe';
-                var text = data.news.motds[e].body;
-                var textSplit = text.split(" ");
-                var finalText = textSplit[0]
+                let text = data.news.motds[e].body;
+                let textSplit = text.split(" ");
+                let finalText = textSplit[0]
                 let t = 1;
                 while(t != textSplit.length) {
                     if((ctx.measureText(finalText+" "+textSplit[t]).width) <= 700) finalText = finalText+" "+textSplit[t]
@@ -155,9 +155,9 @@ module.exports = {
                 ctx.strokeText(data.news.messages[e].title.toUpperCase(), 30, 550);
                 ctx.font ="30px Burbank Big Cd Bk";
                 ctx.fillStyle = '#33edfe';
-                var text = data.news.messages[e].body;
-                var textSplit = text.split(" ");
-                var finalText = textSplit[0]
+                let text = data.news.messages[e].body;
+                let textSplit = text.split(" ");
+                let finalText = textSplit[0]
                 let t = 1;
                 while(t != textSplit.length) {
                     if((ctx.measureText(finalText+" "+textSplit[t]).width) <= 700) finalText = finalText+" "+textSplit[t]
@@ -198,7 +198,7 @@ module.exports = {
     },
 
     async emergencyMessage(bot, data) {
-        var channel = bot.channels.cache.get(channels.emergencynotice)
+        const channel = bot.channels.cache.get(channels.emergencynotice)
         if(data["jcr:baseVersion"] !== channel.topic && data.news.messages.length !==0) {
             let embed = new Discord.MessageEmbed()
             .setAuthor(data.news.messages[0].title, "https://cdn.discordapp.com/attachments/715327691842256906/739843403642306621/giphy.gif")

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 
 module.exports = (bot, message) => {
-    var prefix = ">"
+    var prefix = "?"
 
     if(message.channel.type !== 'text') return
 

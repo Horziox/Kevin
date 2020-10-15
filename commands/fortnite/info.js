@@ -23,7 +23,7 @@ module.exports = {
                 .setTitle("Langue de recherche")
                 .setDescription("Sélectionnez en quelle langue vous avez tapé le nom du cosmétique à rechercher !")
                 .setTimestamp()
-                var langMessage = await message.channel.send(langEmbed)
+                let langMessage = await message.channel.send(langEmbed)
                 await langMessage.react("🇫🇷")
                 await langMessage.react("🇬🇧")
 

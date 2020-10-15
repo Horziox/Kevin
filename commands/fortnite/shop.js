@@ -21,7 +21,7 @@ module.exports = {
                 .setImage('attachment://shop.png')
             }
             else {
-                var response = await axios({method: 'get',url: 'https://fortnite-api.com/v2/shop/br/combined?language=fr'})
+                const response = await axios({method: 'get',url: 'https://fortnite-api.com/v2/shop/br/combined?language=fr'})
                 await genratateShop(response.data.data).then(async (value) => {
                     embed.attachFiles(value)
                     .setImage("attachment://shop.png")

@@ -146,11 +146,9 @@ module.exports = {
                     e = 0
                 }
             }
-            let end = fs.createWriteStream(`./final/shop.png`)
-            let stream = canvas.createPNGStream().pipe(end);
-            stream.on('finish', () => {
-                resolve('./final/shop.png')
-            })
+            const end = fs.createWriteStream(`./final/shop.png`)
+            const stream = canvas.createPNGStream().pipe(end);
+            stream.on('finish', () => resolve('./final/shop.png'));
         })
     }
 }
