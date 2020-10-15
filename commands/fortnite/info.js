@@ -21,7 +21,7 @@ module.exports = {
             const language =  new Promise(async(resolve, reject) => {
                 let langEmbed = new Discord.MessageEmbed()
                 .setTitle("Langue de recherche")
-                .setDescription("Sélectionner en quelle langue vous avez tapé le nom du cosmétique à rechercher !")
+                .setDescription("Sélectionnez en quelle langue vous avez tapé le nom du cosmétique à rechercher !")
                 .setTimestamp()
                 var langMessage = await message.channel.send(langEmbed)
                 await langMessage.react("🇫🇷")
@@ -35,7 +35,7 @@ module.exports = {
                     await langMessage.reactions.removeAll()
                     let endEmbed = new Discord.MessageEmbed()
                     if(collected.size == 0) {
-                        endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tles informations, merci de recommencer !`)
+                        endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir les informations, merci de recommencer !`)
                         .setColor("#bf9322")
                         .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
@@ -58,22 +58,18 @@ module.exports = {
                         let choiceEmbed = new Discord.MessageEmbed()
                         .setTitle("Résultats de la recherche")
                         .setDescription(`**${data.length}** cosmétiques correspondent avec votre recherche : \`${args.join(" ")}\``)
-                        for(let e = 0; e<data.length; e++) {
-                            choiceEmbed.addField(`${data[e].name} (${data[e].type.displayValue})`, `Tapez \`${e+1}\` pour plus d'informations`, true)
-                        }
+                        for(let e = 0; e<data.length; e++) choiceEmbed.addField(`${data[e].name} (${data[e].type.displayValue})`, `Tapez \`${e+1}\` pour plus d'infos`, true);
                         choiceEmbed.setTimestamp()
                         const choiceMessage = await message.channel.send(choiceEmbed)
                         const filter = m => m.author.id === message.author.id
                         const collector = message.channel.createMessageCollector(filter, { time: 20000, max: 1});
     
-                        collector.on('collect', m => {
-                            m.delete()
-                        });
+                        collector.on('collect', m => m.delete());
     
                         collector.on('end', async(msg) => {
                             let endEmbed = new Discord.MessageEmbed()
                             if(msg.length == 0) {
-                                endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tles informations, merci de recommencer !`)
+                                endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir les informations, merci de recommencer !`)
                                 .setColor("#bf9322")
                                 .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
@@ -91,9 +87,8 @@ module.exports = {
                                 }
                             }
                         })
-                    } else {
-                        return resolve(data[0])
-                    }
+                    } else return resolve(data[0])
+
                 }).catch((e) => {
                     console.error(e)
                     let embed = new Discord.MessageEmbed()
@@ -121,15 +116,11 @@ module.exports = {
             let embed = new Discord.MessageEmbed()
             let canvasH = 600
 
-            if(value.variants !== null) {
-                for(let e = 0; e!== value.variants.length; e++) {
-                    canvasH = canvasH + 140
-                }
-            }
+            if(value.variants !== null) for(let e = 0; e!== value.variants.length; e++) canvasH = canvasH + 140;
     
             const canvas = Canvas.createCanvas(1280, canvasH);
             const ctx = canvas.getContext('2d');
-            var cosmetic;
+            let cosmetic;
 
             if(value.images.featured !== null) cosmetic = await Canvas.loadImage(value.images.featured)
             else if(value.images.icon !== null) cosmetic = await Canvas.loadImage(value.images.icon)
@@ -171,7 +162,7 @@ module.exports = {
             .setColor('#bf9322')
             .addField("Nom", value.name)
             .addField("Identifiant", "`"+value.id+"`")
-            .addField("Chemin", "`"+value.path+"`")
+            .addField("Tags", `\`\`\`${value.gameplayTags.join("\n")}\`\`\``)
             .attachFiles(img)
             .setImage('attachment://info.png')
             .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
