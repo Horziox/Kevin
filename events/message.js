@@ -19,13 +19,9 @@ module.exports = (bot, message) => {
 
     if(command.havePermissions) if(!message.channel.permissionsFor(bot.user).has(322624)) return message.channel.send(':warning: Il me manque des permissions dans ce salon pour fonctionner correctement !\nContactez un Staff de ce serveur ou vérifiez que les permissions suivante sois cochées dans les paramètres du salon :\n\`Gérer les messages\`, \`Intégrer des liens\`, \`Joindre des fichiers\`, \`Utiliser des émojis externes\` et \`Ajouter des réactions\`')
 
-    if(command.isDisable) {
-        return message.reply("Cette commande à été désactivée...\nPatience, elle reviendra bientôt ! :tada:");
-    }
+    if(command.isDisable) return message.reply("Cette commande à été désactivée...\nPatience, elle reviendra bientôt ! :tada:");
 
-    if (!cooldowns.has(command.name)) {
-        cooldowns.set(command.name, new Discord.Collection());
-    }
+    if(!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
     const now = Date.now();
     const timestamps = cooldowns.get(command.name);
     const cooldownAmount = (command.cooldown || 0) * 1000
