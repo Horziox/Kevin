@@ -70,7 +70,7 @@ module.exports = {
                         }
                     }
                     plat = emoji[collected.array()[0].emoji.id].api
-                    var data = response.data.data
+                    const data = response.data.data
                     if(data.stats[plat] == null) {
                         let noPlatEmbed = new Discord.MessageEmbed()
                         .setDescription(`Vous n'avez pas de statistiques sur **${emoji[collected.array()[0].emoji.id].name}** :/`)
@@ -134,7 +134,7 @@ module.exports = {
                     ctx.fillText(data.battlePass.level, 750, 595, 100)
                     ctx.fillText(data.battlePass.level+1, 1140, 595, 100)
 
-                    let stats = data.stats[plat]
+                    const stats = data.stats[plat]
 
                     ctx.fillStyle = '#ffffff'
 
