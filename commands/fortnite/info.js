@@ -7,43 +7,41 @@ module.exports = {
     cooldown: 10,
     havePermissions: true,
     async execute(message, args, bot, prefix) {
+        let embed = new Discord.MessageEmbed()
         if(!args.length) {
-            let embed = new Discord.MessageEmbed()
-            .setTitle("Commandes Info Fortnite")
+            embed.setTitle("Commandes Info Fortnite")
             .setDescription(`${prefix}info Nom de la cosmétique\n\nEx: ${prefix}info FLoss`)
             .setColor("#bf9322")
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
             .setTimestamp()
             return message.channel.send(embed)
         }
+        let botmsg;
 
         const infoCosmetics = new Promise(async (resolve, reject) => {
             const language =  new Promise(async(resolve, reject) => {
-                let langEmbed = new Discord.MessageEmbed()
-                .setTitle("Langue de recherche")
+                embed.setTitle("Langue de recherche")
                 .setDescription("Sélectionnez en quelle langue vous avez tapé le nom du cosmétique à rechercher !")
                 .setTimestamp()
-                let langMessage = await message.channel.send(langEmbed)
-                await langMessage.react("🇫🇷")
-                await langMessage.react("🇬🇧")
+                botmsg = await message.channel.send(embed);
+                await botmsg.react("🇫🇷")
+                await botmsg.react("🇬🇧")
 
                 const filter = (user) => user.id = message.author.id
-                const collector = langMessage.createReactionCollector(filter, {time: 20000, max: 1})
+                const collector = botmsg.createReactionCollector(filter, {time: 20000, max: 1})
 
                 collector.on('end', async(collected) => {
                 
-                    await langMessage.reactions.removeAll()
-                    let endEmbed = new Discord.MessageEmbed()
+                    await botmsg.reactions.removeAll()
                     if(collected.size == 0) {
-                        endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir les informations, merci de recommencer !`)
+                        embed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir les informations, merci de recommencer !`)
                         .setColor("#bf9322")
                         .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
-                        return await langMessage.edit(endEmbed)
+                        return await botmsg.edit(embed)
                     } else {
                         let emoji = {"🇫🇷":"fr","🇬🇧":"en"}
                         resolve(emoji[collected.array()[0].emoji.name])
-                        await langMessage.delete()
                     }
                 })
             })
@@ -55,57 +53,51 @@ module.exports = {
                 }).then(async function(response) {
                     var data = response.data.data
                     if(data.length > 1) {
-                        let choiceEmbed = new Discord.MessageEmbed()
-                        .setTitle("Résultats de la recherche")
+                        embed.setTitle("Résultats de la recherche")
                         .setDescription(`**${data.length}** cosmétiques correspondent avec votre recherche : \`${args.join(" ")}\``)
-                        for(let e = 0; e<data.length; e++) choiceEmbed.addField(`${data[e].name} (${data[e].type.displayValue})`, `Tapez \`${e+1}\` pour plus d'infos`, true);
-                        choiceEmbed.setTimestamp()
-                        const choiceMessage = await message.channel.send(choiceEmbed)
+                        for(let e = 0; e<data.length; e++) embed.addField(`${data[e].name} (${data[e].type.displayValue})`, `Tapez \`${e+1}\` pour plus d'infos`, true);
+                        embed.setTimestamp()
+                        await botmsg.edit(embed)
                         const filter = m => m.author.id === message.author.id
                         const collector = message.channel.createMessageCollector(filter, { time: 20000, max: 1});
     
                         collector.on('collect', m => m.delete());
     
                         collector.on('end', async(msg) => {
-                            let endEmbed = new Discord.MessageEmbed()
                             if(msg.length == 0) {
-                                endEmbed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir les informations, merci de recommencer !`)
+                                embed.setDescription(`Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir les informations, merci de recommencer !`)
                                 .setColor("#bf9322")
                                 .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
                                 return await choiceMessage.edit(endEmbed)
                             } else {
                                 if(msg.array()[0].content > data.length+1 || msg.array()[0].content <= 0) {
-                                    endEmbed.setDescription(`Le nombre saisi est impossible...`)
+                                    embed.setDescription(`Le nombre saisi est impossible...`)
                                     .setColor("#bf9322")
                                     .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                                     .setTimestamp()
-                                    return await choiceMessage.edit(endEmbed)
-                                } else {
-                                    await choiceMessage.delete()
-                                    return resolve(data[msg.array()[0].content-1])
-                                }
+                                    return await botmsg.edit(embed)
+                                } else return resolve(data[msg.array()[0].content-1])
                             }
                         })
                     } else return resolve(data[0])
 
                 }).catch((e) => {
                     console.error(e)
-                    let embed = new Discord.MessageEmbed()
                     if(e.response.status == 404) {
                         embed.setTitle("Cosmétique introuvable !")
                         .setDescription(":warning: Vérifiez le nom du cosmétique recherché !")
                         .setColor("#cf3419")
                         .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
-                        return message.channel.send(embed)
+                        return botmsg.edit(embed)
                     } else {
                         embed.setTitle(`Erreur ${e.response.status}`)
                         .setDescription(`\`${e.resonse.data.error}\`\nRéessayez et contactez Horziox si le problème persiste !`)
                         .setColor("#cf3419")
                         .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
-                        return message.channel.send(embed)
+                        return botmsg.edit(embed)
                     }
                 });
             })
@@ -113,7 +105,6 @@ module.exports = {
 
         infoCosmetics.then(async (value) => {
             message.channel.startTyping()
-            let embed = new Discord.MessageEmbed()
             let canvasH = 600
 
             if(value.variants !== null) for(let e = 0; e!== value.variants.length; e++) canvasH = canvasH + 140;
@@ -159,6 +150,8 @@ module.exports = {
             }
             const img = new Discord.MessageAttachment(canvas.toBuffer(), 'info.png')
             embed.setTitle("Information cosmétique")
+            .spliceFields(0, 2)
+            .setDescription("")
             .setColor('#bf9322')
             .addField("Nom", value.name)
             .addField("Identifiant", "`"+value.id+"`")
@@ -168,6 +161,7 @@ module.exports = {
             .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
             .setTimestamp()
             await message.channel.stopTyping()
+            await botmsg.delete()
             return await message.channel.send(embed)
         })
     }

@@ -7,9 +7,9 @@ module.exports = {
     cooldown: 10,
     havePermissions: true,
     async execute(message, args, bot, prefix) {
+        let embed = new Discord.MessageEmbed()
         if(args.length == 0) {
-            let embed = new Discord.MessageEmbed()
-            .setTitle("Commandes Stats Fortnite")
+            embed.setTitle("Commandes Stats Fortnite")
             .setDescription(`${prefix}stats Votre pseudo Epic Games\n\nEx: ${prefix}stats Ninja`)
             .setColor("#bf9322")
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
@@ -24,8 +24,7 @@ module.exports = {
             if(response.data.data.stats.keyboardMouse !== null) text = text + "\n<:cs:744916159752699904> Clavier/Souris"
             if(response.data.data.stats.gamepad !== null) text = text + "\n<:manette:744916145034756126> Manette"
             if(response.data.data.stats.touch !== null) text = text + "\n<:mobile:744916201301606520> Tactile"
-            let embed = new Discord.MessageEmbed()
-            .setTitle("Selectionnez votre plateforme")
+            embed.setTitle("Selectionnez votre plateforme")
             .setDescription(text)
             .setColor("#bf9322")
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
@@ -42,16 +41,15 @@ module.exports = {
 
             collector.on('end', async (collected) => {
                 await botmsg.reactions.removeAll()
-                let endEmbed = new Discord.MessageEmbed()
                 if(collected.size == 0) {
-                    endEmbed.setDescription("Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tes statistiques, merci de recommencer !")
+                    embed.setDescription("Tu as mis trop de temps à me répondre ! :/\nSi tu veux avoir tes statistiques, merci de recommencer !")
                     .setColor("#bf9322")
                     .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                     .setTimestamp()
-                    return await botmsg.edit(endEmbed)
+                    return await botmsg.edit(embed)
                 } else {
                     let plat;
-                    let emoji = {
+                    const emoji = {
                         "744916159752699904": {
                             "api" : "keyboardMouse",
                             "name": "Clavier/Souris"
@@ -72,12 +70,11 @@ module.exports = {
                     plat = emoji[collected.array()[0].emoji.id].api
                     const data = response.data.data
                     if(data.stats[plat] == null) {
-                        let noPlatEmbed = new Discord.MessageEmbed()
-                        .setDescription(`Vous n'avez pas de statistiques sur **${emoji[collected.array()[0].emoji.id].name}** :/`)
+                        embed.setDescription(`Vous n'avez pas de statistiques sur **${emoji[collected.array()[0].emoji.id].name}** :/`)
                         .setColor("#cf3419")
                         .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
-                        return await botmsg.edit(noPlatEmbed) 
+                        return await botmsg.edit(embed)
                     }
                     message.channel.startTyping()
 
@@ -220,20 +217,19 @@ module.exports = {
                     }
 
                     const img = new Discord.MessageAttachment(canvas.toBuffer(), 'stats.png')
-                    endEmbed.setTitle(`Statistiques de ${data.account.name} sur ${emoji[collected.array()[0].emoji.id].name}`)
+                    embed.setTitle(`Statistiques de ${data.account.name} sur ${emoji[collected.array()[0].emoji.id].name}`)
                     .attachFiles(img)
                     .setImage("attachment://stats.png")
                     .setColor("#bf9322")
                     .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                     .setTimestamp()
                     await botmsg.delete()
-                    await message.channel.send(endEmbed)
+                    await message.channel.send(embed)
                     return message.channel.stopTyping()
                 }
             });
         }).catch((e) => {
             console.log(e)
-            let embed = new Discord.MessageEmbed()
             if(e.response.status == 404) {
                 embed.setTitle("Compte introuvable !")
                 .setDescription(":warning: Vérifiez le nom du compte !")
