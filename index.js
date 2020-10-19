@@ -18,9 +18,9 @@ for (const file of eventFiles) {
         const event = require(`./events/${file}`);
         let eventName = file.split('.')[0];
         bot.on(eventName, event.bind(null, bot));
-        console.info(`${eventName} event has been successfully loaded !`);
+        console.info(`Event ${eventName} à été enregistré !`);
     } catch (e) {
-        console.error(`Error when loading ${file} !`);
+        console.error(`Erreur en chargeant ${file} !`);
         console.error(e);
     }
 }
@@ -43,17 +43,12 @@ for (const file of commandFiles) {
     try {
         
     } catch (e) {
-        console.error(`Error when loading ${file} !`);
+        console.error(`Erreur en chargeant ${file} !`);
         console.error(e);
     }
 }
 
 bot.login(process.env.discordToken);
-
-schedule.scheduleJob('*/20 * * * * *', function() {
-    data.reloadData(bot)
-    bot.user.setActivity(`${bot.guilds.cache.size} serveurs | >help`, {type: 'LISTENING'})
-});
 
 schedule.scheduleJob('5 0 0 * * *', function() {
     data.reloadShop(bot)
@@ -62,4 +57,6 @@ schedule.scheduleJob('5 0 0 * * *', function() {
 schedule.scheduleJob('20 * * * * *', async function() {
     await data.reloadShop(bot)
     await data.reloadNewCos(bot)
+    await data.reloadData(bot)
+    bot.user.setActivity(`${bot.guilds.cache.size} serveurs | >help`, {type: 'LISTENING'})
 })

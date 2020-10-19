@@ -6,11 +6,11 @@ module.exports = {
     importFile(bot, filePath) {
         try {
             const command = require(`./${filePath}`);
-            if (bot.commands.has(command.name)) console.warn(`Command ${command.name} has already been registered ! Register multiples files with the same command name will ignore all others previously registered commands !`);
+            if (bot.commands.has(command.name)) console.warn(`La commande ${command.name} est déjà enregistrée !`);
             bot.commands.set(command.name, command);
-            console.info(`Command ${command.name} in ./${filePath} has been successfully loaded !`);
+            console.info(`La commande ${command.name} dans ./${filePath} à été enregistrée !`);
         } catch (e) {
-            console.error(`Error when loading ${filePath} !`);
+            console.error(`Erreur en chargeant ${filePath} !`);
             console.error(e);
         }
     },
@@ -24,6 +24,5 @@ module.exports = {
                 this.importFile(bot, fullPath);
             }
         });
-    },
-
+    }
 }
