@@ -26,7 +26,7 @@ module.exports = {
                 emoji: ":x:",
                 color: "#b51212"
             },
-            "in_maintenance": {
+            "under_maintenance": {
                 name: "En maintenance",
                 emoji: ":tools:",
                 color: "#1266b5"
