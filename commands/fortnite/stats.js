@@ -81,22 +81,36 @@ module.exports = {
                     const canvas = Canvas.createCanvas(1280, 920);
                     const ctx = canvas.getContext('2d');
                     const space = await Canvas.loadImage('./assets/space-background.png')
-                    ctx.drawImage(space, 0, 0, 1280, 300)
-                    ctx.fillStyle = "#272b2e";
-                    ctx.fillRect(0, 300, canvas.width, canvas.height);
+                    ctx.drawImage(space, 0, 0, canvas.width, canvas.height)
+                    
                     let skins = ["https://media.discordapp.net/attachments/715327691842256906/749281675191779378/groot-rocket.png", "https://media.discordapp.net/attachments/715327691842256906/749282553155813476/ironman.png", "https://media.discordapp.net/attachments/715327691842256906/749285313339457601/punk-storm.png"]
                     let choice = skins[Math.floor(Math.random() * skins.length)];
                     const image = await Canvas.loadImage(choice);
-                    ctx.drawImage(image, 950, 0, 300, 800)
-                    ctx.globalAlpha = 0.8
+                    ctx.drawImage(image, 950, 0, image.width/3, image.height/3)
+
+                    ctx.strokeStyle = "#2a8491";
                     ctx.fillStyle = '#2a8491';
-                    ctx.fillRect(660, 210, 600, 410);
+                    ctx.lineJoin = "round";
+                    ctx.lineWidth = 20;
+                    ctx.globalAlpha = 0.9
+                    
+                    ctx.strokeRect(670, 220, 580, 390);
+                    ctx.fillRect(680, 230, 560, 370);
+
                     ctx.globalAlpha = 1
                     ctx.fillStyle = '#292828';
-                    ctx.fillRect(660, 640, 600, 250);
-                    ctx.fillRect(30, 640, 600, 250);
-                    ctx.fillRect(30, 370, 600, 250);
-                    ctx.fillRect(30, 100, 600, 250);
+                    ctx.strokeStyle = "#292828";
+                    ctx.strokeRect(660+(20/2), 640+(20/2), 600-20, 250-20);
+                    ctx.fillRect(660+(20/2), 640+(20/2), 600-20, 250-20);
+
+                    ctx.strokeRect(30+(20/2), 640+(20/2), 600-20, 250-20);
+                    ctx.fillRect(30+(20/2), 640+(20/2), 600-20, 250-20);
+
+                    ctx.strokeRect(30+(20/2), 370+(20/2), 600-20, 250-20);
+                    ctx.fillRect(30+(20/2), 370+(20/2), 600-20, 250-20);
+
+                    ctx.strokeRect(30+(20/2), 100+(20/2), 600-20, 250-20);
+                    ctx.fillRect(30+(20/2), 100+(20/2), 600-20, 250-20);
 
                     ctx.font = '60px Burbank Big Cd Bk'
                     ctx.fillStyle = '#ffffff'
@@ -106,25 +120,40 @@ module.exports = {
                     ctx.fillText("Modes Temp", 760, 670)
                     ctx.fillText("Général", 680, 240)
 
+                    ctx.globalAlpha = 0.9
                     ctx.font = '80px Burbank Big Cd Bk'
                     ctx.fillStyle = '#2a8491'
-                    ctx.fillText(data.account.name, 670, 150, 500)
-                    ctx.font = '25px Burbank Big Cd Bk'
+                    ctx.fillText(data.account.name, 670, 120, 500)
+                    ctx.globalAlpha = 1
+                    const platform = await Canvas.loadImage(`./assets/plateform/${plat}.png`);
+                    ctx.drawImage(platform, 660, 130, 50, 50)
+                    ctx.font = '20px Burbank Big Cd Bk'
                     ctx.fillStyle = '#292828'
-                    let refresh = new Date(data.stats.all.overall.lastModified)
-                    var stringDate = refresh.toLocaleDateString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' })
-                    ctx.fillText("Actualisé le "+stringDate, 670, 190, 300)
+                    const refresh = new Date(data.stats.all.overall.lastModified)
+                    const stringDate = refresh.toLocaleDateString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' })
+                    ctx.fillText("Actualisé le "+stringDate, 720, 165)
 
                     ctx.font = '30px Burbank Big Cd Bk'
                     ctx.fillStyle = '#ffffff'
                 
-                    let lineaire2 = ctx.createLinearGradient(600, 500, 640, 1080);
-                    lineaire2.addColorStop(0.2,'#d481f0')
-                    lineaire2.addColorStop(0.6,'#9198e5')
-                    ctx.fillStyle = lineaire2;
-                    ctx.fillRect(830, 570, data.battlePass.progress*3, 10);
+                    ctx.lineJoin = "round";
+                    ctx.fillStyle = 'white';
                     ctx.strokeStyle = "white";
-                    ctx.strokeRect(830, 570, 300, 10);
+                    ctx.lineWidth = 10;
+                    ctx.globalAlpha = 0.5
+
+                    ctx.strokeRect(830+(10/2), 570+(10/2), 300-10, 0);
+                    ctx.fillRect(830+(10/2), 570+(10/2), 300-10, 0);
+
+                    ctx.globalAlpha = 1
+                    let lineaire = ctx.createLinearGradient(600, 500, 640, 1080);
+                    lineaire.addColorStop(0.01,'#d481f0')
+                    lineaire.addColorStop(0.3,'#5a2ac9')
+                    ctx.fillStyle = lineaire;
+                    ctx.strokeStyle = lineaire;
+
+                    ctx.strokeRect(830+(10/2), 570+(10/2), data.battlePass.progress*3-10, 0);
+                    ctx.fillRect(830+(10/2), 570+(10/2), data.battlePass.progress*3, 0);
 
                     ctx.font = '60px Burbank Big Cd Bk'
                     ctx.fillStyle = '#ffffff'
@@ -220,6 +249,7 @@ module.exports = {
                     embed.setTitle(`Statistiques de ${data.account.name} sur ${emoji[collected.array()[0].emoji.id].name}`)
                     .attachFiles(img)
                     .setImage("attachment://stats.png")
+                    .setDescription("")
                     .setColor("#bf9322")
                     .setFooter(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
                     .setTimestamp()
