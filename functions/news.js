@@ -57,7 +57,7 @@ module.exports = {
                     ctx.font ="25px Burbank Big Cd Bk";
                     ctx.fillStyle = '#ffffff';
                     let title = data.news.motds[i].tabTitleOverride
-                    if(data.news.motds[i].tabTitleOverride == "") title = data.news.motds[i].title
+                    if(data.news.motds[i].tabTitleOverride == undefined) title = data.news.motds[i].title
                     ctx.fillText(title, (Tlength-ctx.measureText(title).width)/2 +right, 35, Tlength)
                     ctx.strokeText(title, (Tlength-ctx.measureText(title).width)/2 +right, 35, Tlength)
                     right = right + Tlength + 2
@@ -120,7 +120,7 @@ module.exports = {
                     ctx.font ="25px Burbank Big Cd Bk";
                     ctx.fillStyle = '#ffffff';
                     let title = data.news.motds[i].tabTitleOverride
-                    if(data.news.motds[i].tabTitleOverride == "") title = data.news.motds[i].title
+                    if(data.news.motds[i].tabTitleOverride == undefined) title = data.news.motds[i].title
                     ctx.fillText(title, (Tlength-ctx.measureText(title).width)/2 +right, 35, Tlength)
                     ctx.strokeText(title, (Tlength-ctx.measureText(title).width)/2 +right, 35, Tlength)
                     right = right + Tlength + 2
