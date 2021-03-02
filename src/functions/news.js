@@ -13,7 +13,6 @@ module.exports = {
             const encoder = new GIFEncoder(1280, 720);
             let type = "./final/br-news.gif";
             if(data["_title"] != "battleroyalenewsv2") type = "./final/creatif-news.gif";
-
             encoder.createReadStream().pipe(fs.createWriteStream(type));
             encoder.start();
             encoder.setRepeat(0);
@@ -60,9 +59,9 @@ module.exports = {
                     ctx.font ="italic 25px Burbank Big Cd Bk";
                     ctx.fillStyle = '#ffffff';
                     let title = data.news.motds[i].tabTitleOverride
-                    if(data.news.motds[i].tabTitleOverride == "" || data.news.motds[i].tabTitleOverride == undefined) title = data.news.motds[i].title
-                    ctx.fillText(title.toUpperCase(), (Tlength-ctx.measureText(title.toUpperCase()).width)/2 +right, 35, Tlength)
-                    ctx.strokeText(title.toUpperCase(), (Tlength-ctx.measureText(title.toUpperCase()).width)/2 +right, 35, Tlength)
+                    if(data.news.motds[i].tabTitleOverride == undefined) title = data.news.motds[i].title
+                    ctx.fillText(title, (Tlength-ctx.measureText(title).width)/2 +right, 35, Tlength)
+                    ctx.strokeText(title, (Tlength-ctx.measureText(title).width)/2 +right, 35, Tlength)
                     right = right + Tlength + 2
                     i++
                 }
