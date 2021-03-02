@@ -26,8 +26,8 @@ module.exports = {
             ctx.fillStyle = background;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            //const vbuck = await Canvas.loadImage(path.join(__dirname, '../../assets/vbuck.png'));
-            //const box = await Canvas.loadImage(path.join(__dirname, '../../assets/itemsbox.png'));
+            const vbuck = await Canvas.loadImage(path.join(__dirname, '../../assets/vbuck.png'));
+            const box = await Canvas.loadImage(path.join(__dirname, '../../assets/itemsbox.png'));
 
             //EN TETE
             const date = new Date(data.date);
@@ -89,7 +89,7 @@ module.exports = {
                 ctx.globalAlpha = 0.2;
                 ctx.fillRect(decalLeft, decalHeight, 310, 256);
 
-                /*if(data[shopType].entries[e].items.length > 1 && data[shopType].entries[e].bundle == null) {
+                if(data[shopType].entries[e].items.length > 1 && data[shopType].entries[e].bundle == null) {
                     let i = 1;
                     let boxHeight = 132;
                     while(i < data[shopType].entries[e].items.length && i <= 5) {
@@ -101,7 +101,7 @@ module.exports = {
                         boxHeight = boxHeight - 42
                         i++  
                     }
-                }*/
+                }
 
                 ctx.globalAlpha = 1;
 
@@ -144,7 +144,6 @@ module.exports = {
                 ctx.globalAlpha = 1;
                 ctx.fillRect(decalLeft, decalHeight+232, 310, 24)
 
-                //console.log(path.join(__dirname, '../../assets/vbuck.png'))
                 ctx.drawImage(vbuck, decalLeft+275, decalHeight+232, 29, 24);
 
                 ctx.textAlign = "center";

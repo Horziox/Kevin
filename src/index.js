@@ -3,12 +3,12 @@ const fs = require("fs");
 const { join } = require('path');
 const chalk = require('chalk');
 
+const Kevin = require('../ressources/index.js');
 const bot = new Discord.Client();
 
-//const data = require('./functions/dataFortnite.js');
 (async () => {
 
-    // Login to Discord
+    // Login to Discord require discordToken in .env file
     require("dotenv").config()
     await bot.login(process.env.discordToken);
 
@@ -38,7 +38,7 @@ const bot = new Discord.Client();
                 const command = require(join(__dirname, 'commands', file))
                 if(bot.commands.has(command.name)) console.log(`${chalk.yellow('WARN')} ${command.name} already exist !`);
                 bot.commands.set(command.name, command);
-                console.log(`${chalk.green('ADD')} ${command.name} command is registered !`);
+                console.log(`${chalk.green('ADD')} ${command.name} command`);
             }
             catch(e) {
                 console.log(`${chalk.red('ERROR')} with ${file} !\n=> ${e}`);

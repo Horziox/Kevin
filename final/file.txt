@@ -3,3 +3,4 @@ br-news.gif
 creatif-news.gif
 stw-news.gif
 shop.png
+leaks.png
