@@ -8,27 +8,27 @@ module.exports = {
         const trad = {
             "operational": {
                 name: "Opérationnel",
-                emoji: "<:statusok:801132528580296754>",
+                emoji: ":white_check_mark:",
                 color: "#14b53f"
             },
             "degraded_performance": {
                 name: "Performance dégradée",
-                emoji: "<:statuslow:801132500377665557>",
+                emoji: ":chart_with_downwards_trend:",
                 color: "#daf018"
             },
             "partial_outage": {
                 name: "Panne partielle",
-                emoji: "<:statusfailure:801132466608799754>",
+                emoji: ":warning:",
                 color: "#e87510"
             },
             "major_outage": {
                 name: "Panne majeure",
-                emoji: "<:statusmajorissue:801132448544981062>",
+                emoji: ":x:",
                 color: "#b51212"
             },
             "under_maintenance": {
                 name: "En maintenance",
-                emoji: "<:statusmaintenance:801132429791330364>",
+                emoji: ":tools:",
                 color: "#1266b5"
             },
 
@@ -56,7 +56,7 @@ module.exports = {
             response.data.components.find(e => e.name == "Fortnite").components.forEach(e => {
                 text = text+`\n${trad[response.data.components.find(i => i.id == e).status].emoji} ${trad[response.data.components.find(i => i.id == e).name]}`
             });
-            text += "\n\n**Désignations**\n<:statusok:801132528580296754> Opérationnel\n<:statuslow:801132500377665557> Performance dégradée\n<:statusfailure:801132466608799754> Panne partielle\n<:statusmajorissue:801132448544981062> Panne majeure\n<:statusmaintenance:801132429791330364> En maintenance";
+            text += "\n\n**Désignations**\n:white_check_mark: Opérationnel\n:chart_with_downwards_trend: Performance dégradée\n:warning: Panne partielle\n:x: Panne majeure\n:tools: En maintenance";
             embed.setDescription(text+"\n\n[Epic Games status](https://status.epicgames.com/)")
             .setFooter(message.author.username, message.author.displayAvatarURL({dynamic: true}))
             .setTimestamp()
