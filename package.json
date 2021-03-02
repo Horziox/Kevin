@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Horziox/Kevin#readme",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "canvas": "^2.7.0",
     "chalk": "^4.1.0",
     "discord.js": "^12.5.1",
