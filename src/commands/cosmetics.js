@@ -127,12 +127,12 @@ module.exports = {
 
             ctx.textAlign = "center";
 
-            ctx.font = 'italic 80px Burbank Big Rg Bk'
+            ctx.font = 'italic 80px Burbank Big Rg Bd'
             ctx.fillStyle = '#ffffff'
 
             ctx.fillText(value.name.toUpperCase(), 820, 90)
 
-            ctx.font = 'italic 30px Burbank Big Rg Bk'
+            ctx.font = 'italic 30px Burbank Big Rg Bd'
             ctx.fillText(`${value.description}`, 820, 140)
             ctx.fillText(`${value.type.displayValue} ${value.rarity.displayValue}`, 820, 250)
             if(value.set == null) ctx.fillText(`Ne fait partie d'aucun ensemble`, 820, 300)
@@ -152,12 +152,12 @@ module.exports = {
                 let h = 600
                 for(let e = 0; e!== value.variants.length; e++) {
                     let decal = 50
-                    ctx.font = '30px Burbank Big Rg Bk'
+                    ctx.font = '30px Burbank Big Rg Bd'
                     ctx.fillText(value.variants[e].type, 50, h)
                     for(let i =0; i!==value.variants[e].options.length; i++) {
                         var variant = await Canvas.loadImage(value.variants[e].options[i].image)
                         ctx.drawImage(variant, decal, h, 80, 80)
-                        ctx.font = '20px Burbank Big Rg Bk'
+                        ctx.font = '20px Burbank Big Rg Bd'
                         ctx.fillText(value.variants[e].options[i].name, decal, h+90)
                         decal += 100
                     }

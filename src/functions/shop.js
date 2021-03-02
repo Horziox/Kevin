@@ -31,16 +31,16 @@ module.exports = {
 
             //EN TETE
             const date = new Date(data.date);
-            ctx.font = "italic 73px Burbank Big Rg Bk";
+            ctx.font = "italic 73px Burbank Big Rg Bd";
             ctx.fillStyle = '#ffffff';
             ctx.textAlign = "left";
             const boutique = ctx.measureText("BOUTIQUE").width
-            ctx.font = "italic 49px Burbank Big Rg Bk";
+            ctx.font = "italic 49px Burbank Big Rg Bd";
             const measure = ctx.measureText(date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()).width
             let left = canvas.width/2 - ((boutique+measure+24)/2)
-            ctx.font = "italic 73px Burbank Big Rg Bk";
+            ctx.font = "italic 73px Burbank Big Rg Bd";
             ctx.fillText("BOUTIQUE", left, 148);
-            ctx.font = "italic 49px Burbank Big Rg Bk";
+            ctx.font = "italic 49px Burbank Big Rg Bd";
             ctx.fillStyle = '#87EEFA';
             const stringDate = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
             ctx.fillText(stringDate.toUpperCase(), left+boutique+24, 139);
@@ -149,25 +149,25 @@ module.exports = {
                 ctx.textAlign = "center";
                 ctx.fillStyle = '#ffffff';
                 let fontSize = 25;
-                ctx.font = `${fontSize}px Burbank Big Rg Bk`;
+                ctx.font = `${fontSize}px Burbank Big Rg Bd`;
                 let name;
                 if(data[shopType].entries[e].bundle == null || data[shopType].entries[e].bundle.name == null) name = data[shopType].entries[e].items[0].name
                 else name = data[shopType].entries[e].bundle.name
                 let measure = ctx.measureText(name.toUpperCase()).width
                 while (measure > 286) {
                     fontSize = fontSize - 1
-                    ctx.font = `${fontSize}px Burbank Big Rg Bk`
+                    ctx.font = `${fontSize}px Burbank Big Rg Bd`
                     measure = ctx.measureText(name.toUpperCase()).width
                 }
                 ctx.fillText(name.toUpperCase(), decalLeft+155, decalHeight+219);
 
-                ctx.font = "16px Burbank Big Rg Bk";
+                ctx.font = "16px Burbank Big Rg Bd";
                 ctx.textAlign = "right";
                 if(data[shopType].entries[e].regularPrice !== data[shopType].entries[e].finalPrice) {
                     ctx.fillText(data[shopType].entries[e].finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "), decalLeft+268, decalHeight+249);
                     ctx.globalAlpha = 0.5;
                     const measureFinal = ctx.measureText(data[shopType].entries[e].finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")).width
-                    ctx.font = "14px Burbank Big Rg Bk";
+                    ctx.font = "14px Burbank Big Rg Bd";
                     const measureRegular = ctx.measureText(data[shopType].entries[e].regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")).width
                     ctx.fillText(data[shopType].entries[e].regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "), decalLeft+ 262 - measureFinal, decalHeight+249);
                     ctx.textAlign = "left";
@@ -191,7 +191,7 @@ module.exports = {
                 if(e == data[shopType].entries.length && shopType == 'featured' && data.daily != null) {
                     ctx.textAlign = "left";
                     ctx.globalAlpha = 1;
-                    ctx.font = "49px Burbank Big Rg Bk";
+                    ctx.font = "49px Burbank Big Rg Bd";
                     ctx.fillStyle = '#ffffff';
                     shopType = 'daily'
                     ctx.fillText(data[shopType].name.toUpperCase(), 57, decalHeight+382);
@@ -204,7 +204,7 @@ module.exports = {
                 if(e == data[shopType].entries.length && (shopType == 'daily' || shopType == 'featured') && data.specialFeatured != null) {
                     ctx.textAlign = "left";
                     ctx.globalAlpha = 1;
-                    ctx.font = "49px Burbank Big Rg Bk";
+                    ctx.font = "49px Burbank Big Rg Bd";
                     ctx.fillStyle = '#ffffff';
                     shopType = 'specialFeatured'
                     if(data[shopType].name != null) ctx.fillText(data[shopType].name.toUpperCase(), 57, decalHeight + 382);
@@ -217,7 +217,7 @@ module.exports = {
                 if(e == data[shopType].entries.length && (shopType == 'specialFeatured' || shopType == 'daily' || shopType == 'featured') && data.specialDaily != null) {
                     ctx.textAlign = "left";
                     ctx.globalAlpha = 1;
-                    ctx.font = "49px Burbank Big Rg Bk";
+                    ctx.font = "49px Burbank Big Rg Bd";
                     ctx.fillStyle = '#ffffff';
                     shopType = 'specialDaily'
                     if(data[shopType].name != null) ctx.fillText(data[shopType].name.toUpperCase(), 57, decalHeight + 382);

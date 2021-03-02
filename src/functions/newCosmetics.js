@@ -16,16 +16,16 @@ module.exports = {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             //EN TETE
-            ctx.font = "italic 73px Burbank Big Rg Bk";
+            ctx.font = "italic 73px Burbank Big Rg Bd";
             ctx.fillStyle = '#ffffff';
             ctx.textAlign = "left";
             const boutique = ctx.measureText("LEAKS").width
-            ctx.font = "italic 49px Burbank Big Rg Bk";
+            ctx.font = "italic 49px Burbank Big Rg Bd";
             const measure = ctx.measureText("OBJETS DATAMINÉS").width
             let left = canvas.width/2 - ((boutique+measure+24)/2)
-            ctx.font = "italic 73px Burbank Big Rg Bk";
+            ctx.font = "italic 73px Burbank Big Rg Bd";
             ctx.fillText("LEAKS", left, 148);
-            ctx.font = "italic 49px Burbank Big Rg Bk";
+            ctx.font = "italic 49px Burbank Big Rg Bd";
             ctx.fillStyle = '#ff2ea9';
             ctx.fillText("OBJETS DATAMINÉS", left+boutique+24, 139);
 
@@ -113,17 +113,17 @@ module.exports = {
                 ctx.textAlign = "center";
                 ctx.fillStyle = '#ffffff';
                 let fontSize = 25;
-                ctx.font = `italic ${fontSize}px Burbank Big Rg Bk`;
+                ctx.font = `italic ${fontSize}px Burbank Big Rg Bd`;
                 let name = item.name
                 let measure = ctx.measureText(name.toUpperCase()).width
                 while (measure > 286) {
                     fontSize = fontSize - 1
-                    ctx.font = `italic ${fontSize}px Burbank Big Rg Bk`
+                    ctx.font = `italic ${fontSize}px Burbank Big Rg Bd`
                     measure = ctx.measureText(name.toUpperCase()).width
                 }
                 ctx.fillText(name.toUpperCase(), decalLeft+155, decalHeight+219);
 
-                ctx.font = "italic 16px Burbank Big Rg Bk";
+                ctx.font = "italic 16px Burbank Big Rg Bd";
 
                 ctx.fillStyle = rarities[rare][1];
                 ctx.textAlign = "left";
