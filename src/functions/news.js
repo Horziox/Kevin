@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const axios = require("axios");
 const Canvas = require("canvas");
 const GIFEncoder = require('gifencoder');
 const fs = require("fs");
@@ -144,15 +143,7 @@ module.exports = {
             .setDescription(data.news.messages[0].body)
             .setColor("#c4281a")
             .setTimestamp()
-            await channel.send(embed).then(message => {
-                axios({
-                    method: 'post',
-                    url: `https://discord.com/api/v6/channels/${channel.id}/messages/${message.id}/crosspost`,
-                    headers: {
-                        "Authorization" : `Bot ${process.env.discordToken}`
-                    }
-                })
-            })
+            await channel.send(embed).then(message => message.crosspost())
             return await channel.setTopic(data["jcr:baseVersion"])
         }
         
