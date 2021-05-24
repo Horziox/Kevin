@@ -21,7 +21,7 @@ Don't hesitate to join the [Homebase server](https://discord.gg/7XyNM4p) !
 
 ### Install dependencies
 
-Install all dependencies (You can find there in the [package.json](https://github.com/Horziox/Kevin/blob/master/package.json)) or run `npm install` command
+Install all dependencies (You can find them in the [package.json](https://github.com/Horziox/Kevin/blob/master/package.json)) or run `npm install` command
 
 ### Setup
 Change values in the index.js file in ressources folder as you want
@@ -29,16 +29,16 @@ In the index.js, change
 ```javascript
 bot.login(process.env.discordToken)
 ```
-by
+to
 ```javascript
 bot.login("yourDiscordTokenHere")
 ```
-Or create an .env file with `discordToken=mytoken` in value !
+Or create an .env file with `discordToken=mytoken` in value!
 
 *You can find your Discord token [here](https://discord.com/developers/applications) after you have created a new Application => Bot*
 
 
-:warning: __**Delete or modify files are on your own riks !**__
+:warning: __**Delete or modify files at your own risk!**__
 
 ### Run
 ```
