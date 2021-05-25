@@ -68,8 +68,8 @@ node src/index
 
 
 ## Features
-Have an idea ?
-Submit it !
+Have an idea?
+Submit it!
 
 ## License
 
