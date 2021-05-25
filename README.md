@@ -21,7 +21,7 @@ Don't hesitate to join the [Homebase server](https://discord.gg/7XyNM4p) !
 
 ### Install dependencies
 
-Install all dependencies (You can find there in the [package.json](https://github.com/Horziox/Kevin/blob/master/package.json)) or run `npm install` command
+Install all dependencies (You can find them in the [package.json](https://github.com/Horziox/Kevin/blob/master/package.json)) or run `npm install` command
 
 ### Setup
 Change values in the index.js file in ressources folder as you want
@@ -29,16 +29,16 @@ In the index.js, change
 ```javascript
 bot.login(process.env.discordToken)
 ```
-by
+to
 ```javascript
 bot.login("yourDiscordTokenHere")
 ```
-Or create an .env file with `discordToken=mytoken` in value !
+Or create an .env file with `discordToken=mytoken` in value!
 
 *You can find your Discord token [here](https://discord.com/developers/applications) after you have created a new Application => Bot*
 
 
-:warning: __**Delete or modify files are on your own riks !**__
+:warning: __**Delete or modify files at your own risk!**__
 
 ### Run
 ```
@@ -59,17 +59,17 @@ node src/index
 ### Fortnite
 - **aes** *Get current aes keys*
 - **blog** *Return 5 last blogs from [here](https://www.epicgames.com/fortnite/en-US/news)*
-- **cos** *Find an BR cosmetics*
+- **cos** *Find the info of a Battle Royale Cosmetic*
 - **leaks** *Display news cosmetics from the last update (image)*
-- **news** *Generate a GIF who indicate the Fortnite Battle Royale news in game*
-- **shop** *Get the current BR shop (image)*
-- **stats** *Generate an image with Fortnite stats of an player*
+- **news** *Generate a GIF of the Battle Royale News In-Game*
+- **shop** *Get the current Battle Royale shop (image)*
+- **stats** *Generate an image with Fortnite stats of a player*
 - **status** *Get the servers status of differents services*
 
 
 ## Features
-Have an idea ?
-Submit it !
+Have an idea?
+Submit it!
 
 ## License
 
