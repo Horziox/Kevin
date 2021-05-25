@@ -59,11 +59,11 @@ node src/index
 ### Fortnite
 - **aes** *Get current aes keys*
 - **blog** *Return 5 last blogs from [here](https://www.epicgames.com/fortnite/en-US/news)*
-- **cos** *Find an BR cosmetics*
+- **cos** *Find the info of a Battle Royale Cosmetic*
 - **leaks** *Display news cosmetics from the last update (image)*
-- **news** *Generate a GIF who indicate the Fortnite Battle Royale news in game*
-- **shop** *Get the current BR shop (image)*
-- **stats** *Generate an image with Fortnite stats of an player*
+- **news** *Generate a GIF of the Battle Royale News In-Game*
+- **shop** *Get the current Battle Royale shop (image)*
+- **stats** *Generate an image with Fortnite stats of a player*
 - **status** *Get the servers status of differents services*
 
 
